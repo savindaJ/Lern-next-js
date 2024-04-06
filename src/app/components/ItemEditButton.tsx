@@ -1,10 +1,10 @@
 import React from 'react';
 
-const EditButton = (prop: any) => {
+const ItemEditButton = () => {
     return (
-        <>
-            <button className='' onClick={() => {
-                const modal = document.getElementById('my_modal_2');
+        <div>
+            <button  onClick={() => {
+                const modal = document.getElementById('editItem');
                 if (modal) {
                     (modal as HTMLDialogElement).showModal();
                 }
@@ -13,15 +13,15 @@ const EditButton = (prop: any) => {
                     <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32l8.4-8.4Z" />
                     <path d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z" />
                 </svg>
-
             </button>
 
-            <dialog id="my_modal_2" className="modal">
+            <dialog id="editItem" className="modal">
                 <div className="modal-box ">
-                    <input type="text" value={prop.id} placeholder="Customer ID" className="input input-bordered w-full" />
-                    <input type="text" value={prop.name} placeholder="Customer Name" className="input input-bordered w-full mt-5" />
-                    <input type="text" value={prop.address} placeholder="Customer Address" className="input input-bordered w-full mt-5" />
-                    <input type="text" value={prop.salary} placeholder="Customer Salary" className="input input-bordered w-full mt-5" />
+                    <h2 className="text-2xl font-bold mb-5">Edit Item</h2>
+                    <input type="text" placeholder="Item ID" className="input input-bordered w-full" />
+                    <input type="text" placeholder="Item Description" className="input input-bordered w-full mt-5" />
+                    <input type="text" placeholder="Item Unit Price" className="input input-bordered w-full mt-5" />
+                    <input type="text" placeholder="Item QTY" className="input input-bordered w-full mt-5" />
 
                     <div className="modal-action">
                         <form method="dialog">
@@ -31,8 +31,9 @@ const EditButton = (prop: any) => {
                         </form>
                     </div>
                 </div>
-            </dialog></>
+            </dialog>
+        </div>
     );
 };
 
-export default EditButton;
+export default ItemEditButton;

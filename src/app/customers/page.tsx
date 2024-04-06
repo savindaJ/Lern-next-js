@@ -16,8 +16,6 @@ const CustomersPage = () => {
 
 
     return (
-
-
         <div>
             <NavBar />
 

@@ -1,11 +1,18 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import NavBar from '../components/NavBar';
 import ButtonComponent from '../components/Button';
 import EditButton from '../components/EditButton';
 import DeleteButton from '../components/DeleteButton';
+import { getAllCustomers } from '../service/customer.service';
 
+interface Customer {
+    id: string;
+    name: string;
+    address: string;
+    salary: string;
+}
 
 const CustomersPage = () => {
 
@@ -13,6 +20,14 @@ const CustomersPage = () => {
     const [name, setName] = useState('kamal');
     const [address, setAddress] = useState('Matara');
     const [salary, setSalary] = useState('Galle');
+
+    const [customers, setCustomers] = useState<Customer[]>([]);
+
+    useEffect(() => {
+        getAllCustomers().then((response) => {
+            setCustomers(response);
+          });
+    }, []);
 
 
     return (
@@ -38,16 +53,21 @@ const CustomersPage = () => {
                         </thead>
                         <tbody>
 
-                            <tr className='hover:bg-lime-900 text-cyan-50'>
-                                <th>CUS-001</th>
-                                <td>SAVINDA</td>
-                                <td>GALLE</td>
-                                <td>12500.998</td>
-                                <td className='p-0'>
-                                <EditButton id={id} name={name} address={address} salary={salary} />
-                                <DeleteButton id={'CUS-000001'} />
-                                </td>
-                            </tr>
+                           {customers.map((customer, index) => {
+                                return (
+                                    <tr key={index} className='hover:bg-slate-500'>
+                                        <td>{customer.id}</td>
+                                        <td>{customer.name}</td>
+                                        <td>{customer.address}</td>
+                                        <td>{customer.salary}</td>
+                                        <td>
+                                            <EditButton />
+                                            <DeleteButton />
+                                        </td>
+                                    </tr>
+                                );
+                            })
+                           }
                         </tbody>
                     </table>
                 </div>

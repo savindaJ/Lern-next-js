@@ -1,76 +1,60 @@
-import React from 'react';
+'use client'
+
+import React, { useState } from 'react';
 import NavBar from '../components/NavBar';
-import dynamic from 'next/dynamic';
+import ButtonComponent from '../components/Button';
+import EditButton from '../components/EditButton';
+import DeleteButton from '../components/DeleteButton';
 
-
-
-
-function openModel() {
-    const modal = document.getElementById('my_modal_1') as HTMLElement;
-    (modal as HTMLDialogElement).showModal();
-}
 
 const CustomersPage = () => {
+
+    const [id, setId] = useState('CUS-001');
+    const [name, setName] = useState('kamal');
+    const [address, setAddress] = useState('Matara');
+    const [salary, setSalary] = useState('Galle');
+
+
     return (
+
+
         <div>
             <NavBar />
 
             <section className='container mt-10 flex justify-end'>
+                <ButtonComponent />
             </section>
 
             <section className='container m-auto mt-10'>
                 <div className="overflow-x-auto">
-                    <table className="table table-zebra">
+                    <table className="table">
                         {/* head */}
                         <thead>
-                            <tr>
-                                <th></th>
+                            <tr className='text-cyan-50 text-left'>
+                                <th>#</th>
                                 <th>Name</th>
-                                <th>Job</th>
-                                <th>Favorite Color</th>
+                                <th>Address</th>
+                                <th>Salary</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {/* row 1 */}
-                            <tr className='hover:bg-sky-700'>
-                                <th>1</th>
-                                <td>Cy Ganderton</td>
-                                <td>Quality Control Specialist</td>
-                                <td>Blue</td>
-                            </tr>
-                            {/* row 2 */}
-                            <tr>
-                                <th>2</th>
-                                <td>Hart Hagerty</td>
-                                <td>Desktop Support Technician</td>
-                                <td>Purple</td>
-                            </tr>
-                            {/* row 3 */}
-                            <tr>
-                                <th>3</th>
-                                <td>Brice Swyre</td>
-                                <td>Tax Accountant</td>
-                                <td>Red</td>
+
+                            <tr className='hover:bg-lime-900 text-cyan-50'>
+                                <th>CUS-001</th>
+                                <td>SAVINDA</td>
+                                <td>GALLE</td>
+                                <td>12500.998</td>
+                                <td className='p-0'>
+                                <EditButton id={id} name={name} address={address} salary={salary} />
+                                <DeleteButton id={'CUS-000001'} />
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </section>
 
-
-
-            <dialog id="my_modal_1" className="modal">
-                <div className="modal-box">
-                    <h3 className="font-bold text-lg">Hello!</h3>
-                    <p className="py-4">Press ESC key or click the button below to close</p>
-                    <div className="modal-action">
-                        <form method="dialog">
-                            {/* if there is a button in form, it will close the modal */}
-                            <button className="btn">Close</button>
-                        </form>
-                    </div>
-                </div>
-            </dialog>
         </div>
     );
 };

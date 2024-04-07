@@ -11,19 +11,21 @@ import { getAllItems } from '../service/item.service';
 interface Item {
     id: string;
     description: string;
-    unitPrice: number;
-    qty: number;
+    price: number;
+    quantity: number;
 }
 
 const ItemPage = () => {
 
     const [items, setItems] = React.useState<Item[]>([]); // Provide type for items state variable
 
+    const [id, setId] = React.useState('');
+
     useEffect(() => {
         getAllItems().then((response) => {
             setItems(response);
         });
-    }, []);
+    }, [items]);
 
 
     return (
@@ -36,7 +38,6 @@ const ItemPage = () => {
             <section className='container m-auto mt-10'>
                 <div className="overflow-x-auto">
                     <table className="table">
-                        {/* head */}
                         <thead>
                             <tr className='text-cyan-50 text-left'>
                                 <th>#</th>
@@ -48,15 +49,17 @@ const ItemPage = () => {
                         </thead>
                         <tbody>
 
-                           {items.map((item, index) => (
-                                <tr key={index} className='text-cyan-50 text-left hover:bg-slate-400'>
+                            {items.map((item, index) => (
+                                <tr onClick={()=>{
+                                    setId(item.id);
+                                }} key={item.id} className='text-cyan-50 text-left hover:bg-slate-400'>
                                     <td>{item.id}</td>
                                     <td>{item.description}</td>
-                                    <td>{item.unitPrice}</td>
-                                    <td>{item.qty}</td>
+                                    <td>{item.price}</td>
+                                    <td>{item.quantity}</td>
                                     <td className='flex align-baseline justify-center'>
-                                        <ItemEditButton />
-                                        <DeleteButton id={item.id} />
+                                        <ItemEditButton id={id} />
+                                        <DeleteButton id={id} />
                                     </td>
                                 </tr>
                             ))}

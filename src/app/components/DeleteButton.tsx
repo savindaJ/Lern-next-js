@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { deleteItem } from '../service/item.service';
 
 const DeleteButton = (prop: any) => {
     return (
@@ -26,7 +27,15 @@ const DeleteButton = (prop: any) => {
                         <form method="dialog">
                             {/* if there is a button in form, it will close the modal */}
                             <button className="btn">Close</button>
-                            <button className="btn btn-error ml-6">Delete</button>
+                            <button className="btn btn-error ml-6" onClick={()=>{
+                                deleteItem(prop.id).then((response)=>{
+                                    console.log(response);
+                                    alert('Item deleted successfully');
+                                }).catch((error)=>{
+                                    console.error(error);
+                                    alert('Error deleting item');
+                                });
+                            }}>Delete</button>
                         </form>
                     </div>
                 </div>

@@ -1,11 +1,37 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
+import { getItem, updateItem } from '../service/item.service';
 
-const ItemEditButton = () => {
+const ItemEditButton = (prop: any) => {
+
+    const [id, setId] = React.useState('');
+    const [description, setDescription] = React.useState('');
+    const [unitPrice, setUnitPrice] = React.useState(0.0);
+    const [qty, setQty] = React.useState(0);
+
+    async function fetchItem() {
+        console.log('prop.id', prop.id);
+        try {
+            const response = await getItem(prop.id);
+            setId(response.id);
+            setDescription(response.description);
+            setUnitPrice(response.price);
+            setQty(response.quantity);
+        } catch (error) {
+            console.error(error);
+            alert('Error fetching item');
+        }
+    }
+
+   
+        // fetchItem();
+
+
     return (
         <div>
             <button  onClick={() => {
+                fetchItem();
                 const modal = document.getElementById('editItem');
                 if (modal) {
                     (modal as HTMLDialogElement).showModal();
@@ -20,16 +46,36 @@ const ItemEditButton = () => {
             <dialog id="editItem" className="modal">
                 <div className="modal-box ">
                     <h2 className="text-2xl font-bold mb-5">Edit Item</h2>
-                    <input type="text" placeholder="Item ID" className="input input-bordered w-full" />
-                    <input type="text" placeholder="Item Description" className="input input-bordered w-full mt-5" />
-                    <input type="text" placeholder="Item Unit Price" className="input input-bordered w-full mt-5" />
-                    <input type="text" placeholder="Item QTY" className="input input-bordered w-full mt-5" />
+                    <input type="text" value={prop.id} placeholder="Item ID" className="input input-bordered w-full" />
+                    <input type="text" onChange={
+                        (e) => setDescription(e.target.value)
+                    } value={description} placeholder="Item Description" className="input input-bordered w-full mt-5" />
+                    <input type="text" onChange={
+                        (e) => setUnitPrice(parseFloat(e.target.value))
+                    
+                    } value={unitPrice} placeholder="Item Unit Price" className="input input-bordered w-full mt-5" />
+                    <input type="text" onChange={
+                        (e) => setQty(parseInt(e.target.value))
+                    
+                    } value={qty} placeholder="Item QTY" className="input input-bordered w-full mt-5" />
 
                     <div className="modal-action">
                         <form method="dialog">
                             {/* if there is a button in form, it will close the modal */}
                             <button className="btn">Close</button>
-                            <button className="btn ml-4 btn-primary">Add Customer</button>
+                            <button className="btn ml-4 btn-primary" onClick={()=>{
+                                const item = {
+                                    id: prop.id,
+                                    description: description,
+                                    price: unitPrice,
+                                    quantity: qty
+                                };
+                                updateItem(item).then((response) => {
+                                    alert('Item updated successfully');
+                                }).catch((error) => {
+                                    alert('Error updating item');
+                                });
+                            }}>Add Customer</button>
                         </form>
                     </div>
                 </div>

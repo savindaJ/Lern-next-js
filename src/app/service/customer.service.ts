@@ -21,3 +21,25 @@ export const addCustomer = async (customer: object) => {
       console.error(error);
     });
 };
+
+export const updateCustomer = async (customer: object) => {
+  return await axios
+    .put("http://localhost:8080/customer", customer)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
+
+export const deleteCustomer = async (id: string) => {
+  return await axios
+    .delete(`http://localhost:8080/customer/${id}`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};

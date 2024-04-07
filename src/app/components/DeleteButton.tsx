@@ -5,8 +5,6 @@ import React from 'react';
 const DeleteButton = (prop: any) => {
     return (
         <>
-
-
             <button className='ml-4 hover:text-red-500' onClick={() => {
                 const modal = document.getElementById('my_modal_3');
                 if (modal) {

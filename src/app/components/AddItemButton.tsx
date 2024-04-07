@@ -3,6 +3,12 @@
 import React from 'react';
 
 const AddItemButton = () => {
+    
+    const [id, setId] = React.useState('');
+    const [description, setDescription] = React.useState('');
+    const [unitPrice, setUnitPrice] = React.useState(0.0);
+    const [qty, setQty] = React.useState(0);
+
     return (
         <div>
             <button className='btn btn-secondary btn-sm' onClick={() => {
@@ -22,7 +28,6 @@ const AddItemButton = () => {
 
                     <div className="modal-action">
                         <form method="dialog">
-                            {/* if there is a button in form, it will close the modal */}
                             <button className="btn">Close</button>
                             <button className="btn ml-4 btn-primary">Add Customer</button>
                         </form>

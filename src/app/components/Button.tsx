@@ -62,6 +62,8 @@ export default function Button() {
                   console.error(error);
                 });
 
+                // geta();
+
                 // getAllCustomers().then((response) => {
                 //   console.log(response);
                 // });

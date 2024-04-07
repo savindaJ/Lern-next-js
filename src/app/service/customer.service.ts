@@ -43,3 +43,14 @@ export const deleteCustomer = async (id: string) => {
       console.error(error);
     });
 };
+
+export const getCustomer = async (id: string) => {
+  return await axios
+    .get(`http://localhost:8080/customer/${id}`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}

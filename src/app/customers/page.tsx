@@ -143,6 +143,7 @@ const CustomersPage = () => {
                                 };
                                 updateCustomer(customer).then((response) => {
                                     console.log(response);
+                                    alert('Customer Updated');
                                 }).catch((error) => {
                                     console.error(error);
                                 });
@@ -163,6 +164,7 @@ const CustomersPage = () => {
                             <button className="btn btn-error ml-6" onClick={() => {
                                 deleteCustomer(id).then((response) => {
                                     console.log(response);
+                                    alert('Customer Deleted');
                                 }).catch((error) => {
                                     console.error(error);
                                 });

@@ -12,3 +12,10 @@ export const getItemIds = async () => {
     console.log(data);
     return data;
 }
+
+export const getOrderId = async () => {
+    const response = await fetch('http://localhost:8080/');
+    console.log('ssssssssssssssssssssss',response);
+    const data = await response.json();
+    return data;
+}

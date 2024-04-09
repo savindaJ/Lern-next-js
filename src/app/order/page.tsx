@@ -2,7 +2,7 @@
 
 import React from 'react';
 import NavBar from '../components/NavBar';
-import { getCusIds, getItemIds } from '../service/order.service';
+import { getCusIds, getItemIds, getOrderId } from '../service/order.service';
 import { getItem } from '../service/item.service';
 import { getCustomer } from '../service/customer.service';
 
@@ -26,6 +26,8 @@ const OrderPage = () => {
 
     const [itemIds, setItemIds] = React.useState<string[]>([]);
 
+    const [orderId, setOrderId] = React.useState<string>('');
+
     const [item, setItem] = React.useState<Item>({id: '', description: '', price: 0, quantity: 0}); 
 
     const [customer, setCustomer] = React.useState<Customer>({id: '', name: '', address: '', salary: 0});
@@ -38,11 +40,18 @@ const OrderPage = () => {
        getCusIds().then(data => setCusids(data));
     }, []);
 
+    React.useEffect(() => {
+        getOrderId().then(data => {
+            setOrderId(data.nextId);
+            console.log(data);
+        });
+    }, []);
+
     return (
         <div>
             <NavBar />
             <section className='container m-auto'>
-                <input type="text" placeholder="Next ID" className="input input-bordered w-96 mt-5 mr-8" />
+                <input value={orderId} type="text" placeholder="Next ID" className="input input-bordered w-96 mt-5 mr-8" />
                 <input type="date" placeholder="Type here" className="input input-bordered w-96 mt-5" />
                 <div className="grid grid-cols-3 gap-4 mt-5 md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-3">
                     <div className="border rounded-lg">
